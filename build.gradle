@@ -15,11 +15,20 @@ configurations {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
+bootRun {
+    if (project.hasProperty('args')) {
+        args project.args.split(',')
+    }
+}
+
 dependencies {
+    compile 'ru.hw:md5:1.0-SNAPSHOT'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.3.0.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

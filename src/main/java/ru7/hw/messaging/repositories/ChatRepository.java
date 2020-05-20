@@ -7,5 +7,4 @@ import ru7.hw.messaging.entities.Chat;
 
 @Repository
 public interface ChatRepository extends ReactiveMongoRepository<Chat, String> {
-
 }

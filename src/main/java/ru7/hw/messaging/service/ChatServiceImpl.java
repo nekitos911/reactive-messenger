@@ -7,6 +7,7 @@ import reactor.core.publisher.Mono;
 import ru7.hw.messaging.entities.Chat;
 import ru7.hw.messaging.repositories.ChatRepository;
 import ru7.hw.messaging.repositories.MessageRepository;
+import ru7.hw.messaging.utils.UserUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
     private final ChatRepository chatRepository;
+    private final UserUtils userUtils;
 
     @Override
     public Mono<Chat> update(Chat chat) {
@@ -33,7 +35,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public Flux<Chat> getAll() {
-        return chatRepository.findAll();
+        return chatRepository.findAll().filter(chat -> chat.getUsers().contains(userUtils.getUsername()));
     }
 
     @Override

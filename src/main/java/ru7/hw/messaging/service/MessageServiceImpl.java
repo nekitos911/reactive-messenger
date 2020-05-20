@@ -20,12 +20,10 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Flux<Message> getChatById(String chatId) {
-        return messageRepository.findAll();
-//        return messageRepository.findByChatId(chatId);
-//        return chatRepository
-//                .findById(chatId)
-//                .filter(chat -> chat.getUsers().contains(userUtils.getUsername()))
-//                .flatMapMany(chat -> messageRepository.findByChatId(chatId));
+        return chatRepository
+                .findById(chatId)
+                .filter(chat -> chat.getUsers().contains(userUtils.getUsername()))
+                .flatMapMany(chat -> messageRepository.findByChatId(chatId));
     }
 
     @Override

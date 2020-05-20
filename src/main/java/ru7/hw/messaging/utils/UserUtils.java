@@ -1,12 +1,14 @@
 package ru7.hw.messaging.utils;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 public class UserUtils {
-    @Value("${application.username}")
     @Getter
+    @Setter
     private String username;
+
 }

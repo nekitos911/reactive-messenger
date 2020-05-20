@@ -9,8 +9,6 @@ import reactor.core.publisher.Mono;
 import ru7.hw.messaging.entities.Message;
 import ru7.hw.messaging.service.MessageService;
 
-import java.util.Date;
-
 @RestController()
 @RequestMapping("/messages")
 @RequiredArgsConstructor
@@ -19,8 +17,7 @@ public class MessageController {
 
     @GetMapping(value = "/{chatId}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Message> getMessagesFromChat(@PathVariable String chatId) {
-        return messageService.getChatById(chatId)
-                .defaultIfEmpty(new Message("1", "error", "tesr", "test", new Date()));
+        return messageService.getChatById(chatId);
     }
 
     @PostMapping("/{chatId}")
